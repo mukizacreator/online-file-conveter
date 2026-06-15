@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free online file converter — convert documents, images, audio, and video instantly.">
+    <meta name="keywords" content="file converter, online converter, PDF to JPG, MP3 to MP4, Emmanuel MUKIZA">
+    <meta name="author" content="Emmanuel MUKIZA">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="icon" href="favicon.png">
+    <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online File Converter</title>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+  <header>
+    <h1>Online File Converter</h1>
+    <p>Convert your files easily and securely — built by Emmanuel MUKIZA</p>
+  </header>
+
+  <main>
+  <div class="converter-box">
+    <div class="input-row">
+      <input type="file" id="fileInput" class="file-input">
+      <select id="formatSelect" class="format-select">
+        <option value="jpg">Convert to JPG</option>
+        <option value="png">Convert to PNG</option>
+        <option value="pdf">Convert to PDF</option>
+        <option value="docx">Convert to DOCX</option>
+        <option value="xlsx">Convert to XLSX</option>
+        <option value="mp3">Convert to MP3</option>
+        <option value="mp4">Convert to MP4</option>
+        <option value="zip">Convert to ZIP</option>
+        <option value="txt">Convert to TXT</option>
+        <option value="json">Convert to JSON</option>
+      </select>
+    </div>
+    <button id="convertBtn" class="convert-btn">Convert File</button>
+    <div id="result"></div>
+  </div>
+</main>
+
+  <footer>
+    <p>© 2026 Emmanuel MUKIZA | Hosted on GitHub Pages</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
