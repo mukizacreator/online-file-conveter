@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Responsive layout -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <!-- SEO -->
+  <meta
+    name="description"
+    content="Create an account for the Universal Online File Converter."
+  >
+
+  <meta
+    name="keywords"
+    content="sign up, register, create account, online file converter account"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <!-- Social preview -->
+  <meta
+    property="og:title"
+    content="Sign Up | Online File Converter"
+  >
+
+  <meta
+    property="og:description"
+    content="Create your account and start using the Universal Online File Converter."
+  >
+
+  <meta
+    property="og:image"
+    content="favicon.png"
+  >
+
+  <title>
+    Sign Up | Online File Converter
+  </title>
+
+  <!-- Website favicon -->
+<link
+  rel="icon"
+  type="image/png"
+  href="favicon.png"
+>
+
+<link
+  rel="shortcut icon"
+  href="favicon.png"
+>
+
+<link
+  rel="apple-touch-icon"
+  href="favicon.png"
+>
+
+  <!-- Main stylesheet -->
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+  >
+</head>
+
+<body>
+
+<!-- =========================
+     Navigation Bar
+========================= -->
+
+<nav class="top-nav">
+
+  <div class="nav-left">
+
+    <a
+      href="index.html"
+      class="nav-link"
+    >
+      <i class="fa-solid fa-table-columns"></i>
+      Dashboard
+    </a>
+
+    <a
+      href="projects.html"
+      class="nav-link"
+    >
+      <i class="fa-solid fa-diagram-project"></i>
+      Other Projects
+    </a>
+
+    <a
+      href="about.html"
+      class="nav-link"
+    >
+      <i class="fa-solid fa-circle-info"></i>
+      About & Support
+    </a>
+
+  </div>
+
+  <div class="nav-right">
+
+    <a
+      href="signin.html"
+      class="nav-link"
+    >
+      <i class="fa-solid fa-right-to-bracket"></i>
+      Sign In
+    </a>
+
+    <a
+      href="signup.html"
+      class="nav-link active"
+    >
+      <i class="fa-solid fa-user-plus"></i>
+      Sign Up
+    </a>
+
+  </div>
+
+</nav>
+
+<!-- =========================
+     Page Header
+========================= -->
+
+<header>
+
+  <h1>Create Account</h1>
+
+  <p class="subtitle">
+    Register securely to unlock larger file conversions.
+  </p>
+
+</header>
+
+<!-- =========================
+     Sign Up Form
+========================= -->
+
+<main class="dashboard">
+
+  <div
+    class="converter-box"
+    style="max-width:560px;"
+  >
+
+    <form id="signupForm">
+
+      <!-- Username -->
+
+      <div style="margin-bottom:18px;">
+
+        <label for="signupUsername">
+          Username
+        </label>
+
+        <input
+          type="text"
+          id="signupUsername"
+          placeholder="Choose a username"
+          minlength="3"
+          required
+        >
+
+      </div>
+
+      <!-- Email -->
+
+      <div style="margin-bottom:18px;">
+
+        <label for="signupEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="signupEmail"
+          placeholder="Enter your email"
+          required
+        >
+
+      </div>
+
+      <!-- Password -->
+
+      <div style="margin-bottom:18px;">
+
+        <label for="signupPassword">
+          Password
+        </label>
+
+        <div
+          style="
+            display:flex;
+            gap:10px;
+            margin-top:8px;
+          "
+        >
+
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create password"
+            required
+            style="flex:1;"
+          >
+
+          <button
+            type="button"
+            id="toggleSignup"
+            class="convert-btn"
+            style="
+              padding:14px 18px;
+              white-space:nowrap;
+            "
+          >
+            <i class="fa-solid fa-eye"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Confirm Password -->
+
+      <div style="margin-bottom:20px;">
+
+        <label for="signupConfirmPassword">
+          Confirm Password
+        </label>
+
+        <input
+          type="password"
+          id="signupConfirmPassword"
+          placeholder="Re-enter password"
+          required
+        >
+
+      </div>
+
+      <!-- Password Requirements -->
+
+      <div
+        style="
+          color:#bbb;
+          font-size:0.85rem;
+          line-height:1.7;
+          margin-bottom:22px;
+        "
+      >
+        Password requirements:
+        <br>
+        • At least 5 characters
+        <br>
+        • At least one capital letter
+        <br>
+        • At least one number
+        <br>
+        • At least one symbol
+      </div>
+
+      <!-- Create Account Button -->
+
+      <button
+        type="submit"
+        class="convert-btn"
+        style="
+          width:100%;
+          padding:14px;
+          font-size:1rem;
+        "
+      >
+        Create Account
+      </button>
+
+      <!-- Messages appear here -->
+
+      <div
+        id="signupMessage"
+        style="
+          margin-top:18px;
+          text-align:center;
+        "
+      ></div>
+
+    </form>
+
+  </div>
+
+</main>
+
+<!-- =========================
+     Footer
+========================= -->
+
+<footer>
+
+  <div class="copyright">
+    © 2026 Emmanuel MUKIZA
+  </div>
+
+</footer>
+
+<!-- Authentication JavaScript -->
+<script src="auth.js"></script>
+
+</body>
+</html>
