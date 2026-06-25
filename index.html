@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ============================================
+       METADATA & SEO CONFIGURATION
+       ============================================ -->
+  <!-- Basic character encoding and responsive viewport settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO meta tags: comprehensive description and keywords for search engine optimization -->
+  <meta name="description" content="Convert PDF, DOCX, JPG, PNG, WEBP, MP3, EPUB and many other file formats online for free. Fast, secure and easy to use.">
+  <meta name="keywords" content="file converter, online file converter, convert pdf to docx, convert docx to pdf, convert jpg to png, convert png to jpg, convert webp to png, convert mp3 to wav, convert epub to pdf, universal converter, free online converter">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph tags for social media sharing previews -->
+  <meta property="og:title" content="Online File Converter">
+  <meta property="og:description" content="Universal online file converter for documents, images and audio files.">
+  <meta property="og:image" content="favicon.png">
+  
+  <!-- Page title displayed in browser tab -->
+  <title>Online File Converter | Universal File Conversion</title>
+  
+  <!-- ============================================
+       FAVICON & ICON LINKS
+       ============================================ -->
+  <!-- Multiple icon formats for cross-browser and device compatibility -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  
+  <!-- ============================================
+       STYLESHEETS
+       ============================================ -->
+  <!-- Custom site stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome 6 icon library for navigation and UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <!-- Left side: primary navigation links (Dashboard is active) -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-link active"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+      <a href="projects.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Other Projects</a>
+      <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About & Support</a>
+    </div>
+
+    <!-- Right side: dynamically shows guest links OR user profile based on login status -->
+    <div class="nav-right" id="navRight">
+      <!-- Guest navigation (visible when not logged in) -->
+      <div id="guestNav">
+        <a href="signin.html" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+        <a href="signup.html" class="nav-link"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+      </div>
+      <!-- Profile navigation (visible when logged in) -->
+      <div id="profileNav" style="display:none;">
+        <a href="profile.html" class="nav-link" id="profileButton">
+          <i class="fa-solid fa-circle-user"></i>
+          <span id="navUsername">Profile</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       PAGE HEADER / HERO SECTION
+       ============================================ -->
+  <!-- Main title and subtitle introducing the file converter tool -->
+  <header>
+    <h1>Online File Converter</h1>
+    <p class="subtitle">Convert your files easily and securely — built by Emmanuel MUKIZA</p>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT - FILE CONVERTER TOOL
+       ============================================ -->
+  <!-- Core conversion interface: file selection, format dropdown, and convert button -->
+  <main class="dashboard">
+    <div class="converter-box">
+      <div class="input-row">
+        <!-- Hidden file input with custom styled label -->
+        <label for="fileInput" class="custom-file-label"><i class="fa-solid fa-folder-open"></i> Choose File</label>
+        <input type="file" id="fileInput">
+        <!-- Displays the name of the selected file -->
+        <span id="fileName">No file chosen</span>
+        <!-- Dropdown for selecting target output format -->
+        <select id="formatSelect" class="format-select">
+          <option value="pdf">PDF</option>
+          <option value="docx">DOCX</option>
+          <option value="jpg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="webp">WEBP</option>
+          <option value="txt">TXT</option>
+          <option value="epub">EPUB</option>
+        </select>
+        <!-- Convert button to trigger file conversion -->
+        <button id="convertBtn" class="convert-btn"><i class="fa-solid fa-arrows-rotate"></i> Convert</button>
+      </div>
+      <!-- Container for displaying conversion results, errors, or download links -->
+      <div id="result"></div>
+    </div>
+  </main>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <!-- Main application logic for file conversion -->
+  <script src="script.js"></script>
+
+  <!-- Inline script: Session management for navigation bar -->
+  <!-- Checks if user is logged in and displays appropriate nav elements -->
+  <script>
+    const loggedInEmail = localStorage.getItem("loggedInUser");
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find((u) => u.email === loggedInEmail);
+    const guestNav = document.getElementById("guestNav");
+    const profileNav = document.getElementById("profileNav");
+    const navUsername = document.getElementById("navUsername");
+
+    // If user is logged in, hide guest links and show profile link with username
+    if (user) {
+      guestNav.style.display = "none";
+      profileNav.style.display = "block";
+      navUsername.textContent = user.username;
+    }
+  </script>
+
+  <script src="notifications.js"></script>
+
+  <script src="modal.js"></script>
+
+  <!-- ============================================
+       FOOTER - SUPPORT INFO & COPYRIGHT
+       ============================================ -->
+  <!-- Lists all supported file formats and provides a brief system description -->
+  <footer>
+  <section class="footer-support">
+    My system supports: Documents: PDF, DOCX, DOC, ODT, TXT, EPUB, RTF, HTML | Images: JPG, PNG, WEBP, TIFF, BMP, GIF.<br>
+    Easily convert all your files securely and instantly.
+  </section>
+  <div class="copyright">© 2026 Emmanuel MUKIZA | Hosted on GitHub</div>
+</footer>
+
+</body>
+</html>
