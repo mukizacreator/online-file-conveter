@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <title>My Profile | Online File Converter</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+      <a href="projects.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Other Projects</a>
+      <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About & Support</a>
+    </div>
+    <div class="nav-right">
+      <div id="guestNav">
+        <a href="signin.html" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+        <a href="signup.html" class="nav-link"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+      </div>
+      <div id="profileNav" style="display:none;">
+        <a href="profile.html" class="nav-link active" id="profileButton">
+          <img id="navProfilePhoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" style="width:28px; height:28px; border-radius:50%; object-fit:cover; border:2px solid #00bcd4; margin-right:4px;">
+          <span id="navUsername">Profile</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       PAGE HEADER
+       ============================================ -->
+  <header>
+    <h1>My Profile</h1>
+    <p class="subtitle">Manage your account and security settings.</p>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main class="dashboard">
+    <div class="converter-box" style="width:min(96%,1000px); padding:0; overflow:hidden;">
+      <div style="display:flex; flex-wrap:wrap;">
+
+        <!-- ============================================
+             LEFT SIDEBAR
+             ============================================ -->
+        <aside style="width:220px; background:rgba(255,255,255,0.06); padding:20px;">
+          <!-- Profile Photo Section -->
+<div style="text-align:center; margin-bottom:20px;">
+  <div id="profileImageWrapper" style="cursor:pointer; position:relative; display:inline-block;">
+    <img id="profileImage" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" style="width:90px; height:90px; border-radius:50%; object-fit:cover; display:block; margin:auto; border:3px solid #00bcd4; transition: transform 0.3s;">
+    <div style="position:absolute; bottom:0; right:0; background:rgba(0,0,0,0.6); border-radius:50%; padding:4px 6px; font-size:12px; color:#fff;">
+      <i class="fa-solid fa-expand"></i>
+    </div>
+  </div>
+  
+  <!-- Upload and Remove Photo buttons - Side by side -->
+  <div style="display:flex; justify-content:center; gap:8px; margin-top:8px; flex-wrap:wrap;">
+    <input type="file" id="profilePhotoInput" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+    <button id="uploadPhotoBtn" class="convert-btn" style="padding:5px 15px; font-size:0.75rem;" onclick="document.getElementById('profilePhotoInput').click();">
+        <i class="fa-solid fa-camera"></i> Upload Photo
+      </button>
+    <!-- Remove Photo button will be inserted here by JavaScript -->
+    <div id="removePhotoContainer" style="display:inline-block;"></div>
+  </div>
+  
+  <h3 id="profileUsername" style="margin-top:12px; margin-bottom:3px; font-size:1rem;">User</h3>
+  <p id="profileEmailDisplay" style="color:#aaa; font-size:0.8rem; margin:0; word-break:break-all;">user@email.com</p>
+</div>
+
+          <!-- Tab Navigation - No active class by default -->
+          <a href="#" class="support-link" id="accountTab"><i class="fa-solid fa-user"></i> Account</a>
+          <a href="#" class="support-link" id="securityTab"><i class="fa-solid fa-shield-halved"></i> Security</a>
+        </aside>
+
+        <!-- ============================================
+             RIGHT CONTENT
+             ============================================ -->
+        <section style="flex:1; min-width:250px; padding:14px 20px;">
+
+          <!-- PROFILE VIEW -->
+          <div id="profileView">
+            <h2 style="font-size:1.1rem; margin-top:0; margin-bottom:10px;">Profile Information</h2>
+            <div style="background:rgba(255,255,255,0.06); padding:16px 20px; border-radius:10px;">
+              <div style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06);">
+                <p style="color:#aaa; margin:0; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px;">Username</p>
+                <p style="font-size:1.1rem; font-weight:600; margin:3px 0 0 0; word-break:break-word;" id="profileViewUsername">User</p>
+              </div>
+              <div>
+                <p style="color:#aaa; margin:0; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px;">Email</p>
+                <p style="font-size:1.1rem; font-weight:600; margin:3px 0 0 0; word-break:break-all;" id="profileViewEmail">user@email.com</p>
+              </div>
+            </div>
+            <p style="color:#888; font-size:0.75rem; margin-top:10px; text-align:center;">
+              <i class="fa-solid fa-arrow-left"></i> Click <strong>Account</strong> or <strong>Security</strong> from the sidebar to manage your settings.
+            </p>
+          </div>
+
+          <!-- ACCOUNT PANEL -->
+          <div id="accountPanel" style="display:none;">
+            <h2 style="font-size:1.1rem; margin-top:0; margin-bottom:10px;">Account Information</h2>
+            <p style="color:#aaa; font-size:0.8rem; margin-bottom:12px;">Update your email or username. Enter your current password to save changes.</p>
+            
+            <div style="background:rgba(255,255,255,0.06); padding:12px 16px; border-radius:8px; margin-bottom:12px;">
+              <div style="margin-bottom:6px;">
+                <p style="color:#aaa; margin:0; font-size:0.65rem; text-transform:uppercase; letter-spacing:1px;">Current Username</p>
+                <p style="font-size:0.95rem; font-weight:600; margin:2px 0 0 0;" id="accountUsernameDisplay">User</p>
+              </div>
+              <div>
+                <p style="color:#aaa; margin:0; font-size:0.65rem; text-transform:uppercase; letter-spacing:1px;">Current Email</p>
+                <p style="font-size:0.95rem; font-weight:600; margin:2px 0 0 0; word-break:break-all;" id="accountEmailDisplay">user@email.com</p>
+              </div>
+            </div>
+            
+            <div style="margin-bottom:10px;">
+              <label style="display:block; margin-bottom:3px; font-weight:600; font-size:0.8rem;">Current Password *</label>
+              <div style="display:flex; gap:6px;">
+                <input type="password" id="accountCurrentPassword" placeholder="Enter your current password" style="flex:1; padding:6px 12px; border:none; outline:none; border-radius:8px; background:rgba(255,255,255,0.12); color:white; font-size:0.85rem;">
+                <button type="button" id="toggleAccountPassword" class="convert-btn" style="padding:6px 10px; white-space:nowrap; flex-shrink:0; font-size:0.75rem;">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div style="margin-bottom:10px;">
+              <label style="display:block; margin-bottom:3px; font-weight:600; font-size:0.8rem;">New Email</label>
+              <input type="email" id="profileEmail" placeholder="Enter new email" style="width:100%; padding:6px 12px; border:none; outline:none; border-radius:8px; background:rgba(255,255,255,0.12); color:white; font-size:0.85rem;">
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="display:block; margin-bottom:3px; font-weight:600; font-size:0.8rem;">New Username</label>
+              <input type="text" id="profileUsernameInput" placeholder="Enter new username" style="width:100%; padding:6px 12px; border:none; outline:none; border-radius:8px; background:rgba(255,255,255,0.12); color:white; font-size:0.85rem;">
+            </div>
+
+            <button class="convert-btn" id="saveAccountBtn" style="width:100%; padding:8px; font-size:0.85rem;" onclick="handleSaveAccount(event)">Save Changes</button>
+          </div>
+
+          <!-- SECURITY PANEL -->
+          <div id="securityPanel" style="display:none;">
+            <h2 style="font-size:1.1rem; margin-top:0; margin-bottom:10px;">Security Settings</h2>
+            <p style="color:#aaa; font-size:0.8rem; margin-bottom:12px;">Change your password or manage your account security.</p>
+            
+            <div style="margin-bottom:10px;">
+              <label style="display:block; margin-bottom:3px; font-weight:600; font-size:0.8rem;">Current Password</label>
+              <div style="display:flex; gap:6px;">
+                <input type="password" id="currentPassword" placeholder="Enter current password" style="flex:1; padding:6px 12px; border:none; outline:none; border-radius:8px; background:rgba(255,255,255,0.12); color:white; font-size:0.85rem;">
+                <button type="button" id="toggleCurrentPassword" class="convert-btn" style="padding:6px 10px; white-space:nowrap; flex-shrink:0; font-size:0.75rem;">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div style="margin-bottom:6px;">
+              <label style="display:block; margin-bottom:3px; font-weight:600; font-size:0.8rem;">New Password</label>
+              <div style="display:flex; gap:6px;">
+                <input type="password" id="newPassword" placeholder="Enter new password" style="flex:1; padding:6px 12px; border:none; outline:none; border-radius:8px; background:rgba(255,255,255,0.12); color:white; font-size:0.85rem;">
+                <button type="button" id="toggleNewPassword" class="convert-btn" style="padding:6px 10px; white-space:nowrap; flex-shrink:0; font-size:0.75rem;">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div style="color:#bbb; font-size:0.65rem; margin-bottom:10px; background:rgba(255,255,255,0.05); padding:4px 10px; border-radius:6px;">
+              <i class="fa-solid fa-circle-info" style="color:#00bcd4;"></i> At least 5 chars, one capital letter, one number, one symbol
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="display:block; margin-bottom:3px; font-weight:600; font-size:0.8rem;">Confirm Password</label>
+              <div style="display:flex; gap:6px;">
+                <input type="password" id="confirmPassword" placeholder="Confirm new password" style="flex:1; padding:6px 12px; border:none; outline:none; border-radius:8px; background:rgba(255,255,255,0.12); color:white; font-size:0.85rem;">
+                <button type="button" id="toggleConfirmPassword" class="convert-btn" style="padding:6px 10px; white-space:nowrap; flex-shrink:0; font-size:0.75rem;">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <button class="convert-btn" id="changePasswordBtn" style="width:100%; padding:8px; font-size:0.85rem;">Change Password</button>
+            <br><br>
+            <button class="convert-btn" id="logoutBtn" style="width:100%; padding:8px; font-size:0.85rem; background:#ff9800;">Log Out</button>
+            <br><br>
+            <button class="convert-btn" id="deleteAccountBtn" style="width:100%; padding:8px; font-size:0.85rem; background:#e53935;">Delete Account</button>
+          </div>
+
+          <div id="profileMessage" style="display:none;"></div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="profile.js"></script>
+  <script src="notifications.js?v=4"></script>
+  <script src="modal.js?v=4"></script>
+
+  <script>
+  // ============================================
+  // HIDE NAVIGATION ON PROFILE PAGE
+  // ============================================
+  (function() {
+    const loggedInEmail = localStorage.getItem("loggedInUser");
+    
+    // Hide profile nav on profile page
+    const profileNav = document.getElementById("profileNav");
+    if (profileNav) {
+      profileNav.style.display = "none";
+    }
+    
+    // Hide guest nav if user is logged in
+    const guestNav = document.getElementById("guestNav");
+    if (loggedInEmail && guestNav) {
+      guestNav.style.display = "none";
+    }
+  })();
+</script>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer>
+    <div class="copyright">© 2026 Emmanuel MUKIZA</div>
+  </footer>
+
+</body>
+</html>
