@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ============================================
+       METADATA & SEO CONFIGURATION
+       ============================================ -->
+  <!-- Basic character encoding and responsive viewport settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Controls how referrer information is sent when navigating -->
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <!-- SEO meta tags for search engine optimization -->
+  <meta name="description" content="Sign in to your Universal Online File Converter account.">
+  <meta name="keywords" content="sign in, login, online file converter account">
+  <meta name="robots" content="index, follow"> <!-- Allows search engines to index and follow links -->
+  
+  <!-- Open Graph tags for social media sharing previews (Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="Sign In | Online File Converter">
+  <meta property="og:description" content="Access your Online File Converter account.">
+  <meta property="og:image" content="favicon.png"> <!-- Image shown when link is shared -->
+  
+  <!-- Page title displayed in browser tab -->
+  <title>Sign In | Online File Converter</title>
+  
+  <!-- ============================================
+       FAVICON & ICON LINKS
+       ============================================ -->
+  <!-- Multiple icon formats for cross-browser and device compatibility -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png"> <!-- For iOS devices when adding to home screen -->
+  
+  <!-- ============================================
+       STYLESHEETS
+       ============================================ -->
+  <!-- Custom site stylesheet with dark glass-morphism theme -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome 6 icon library for UI icons (eye, user, etc.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <!-- Left side: primary navigation links to main pages -->
+  <!-- Right side: Sign In is active (highlighted with 'active' class) -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+      <a href="projects.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Other Projects</a>
+      <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About & Support</a>
+    </div>
+    <div class="nav-right">
+      <!-- 'active' class highlights current page in navigation -->
+      <a href="signin.html" class="nav-link active"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+      <a href="signup.html" class="nav-link"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       PAGE HEADER
+       ============================================ -->
+  <!-- Main title and subtitle for the sign-in page -->
+  <header>
+    <h1>Sign In</h1>
+    <p class="subtitle">Access your account securely.</p>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT - SIGN IN FORM
+       ============================================ -->
+  <!-- Login form with email, password (with show/hide toggle), and submit button -->
+  <main class="dashboard">
+    <!-- Limited to max-width:520px for centered, compact form layout -->
+    <div class="converter-box" style="max-width:520px;">
+      <!-- Form submission handled by JavaScript (auth.js) via event listener -->
+      <!-- autocomplete="off" prevents browser from autofilling, though individual fields may override -->
+      <form id="signinForm" autocomplete="off" method="post" action="#">
+        
+        <!-- EMAIL INPUT FIELD -->
+        <div style="margin-bottom:18px;">
+          <label for="signinEmail">Email</label>
+          <input type="email" id="signinEmail" name="email" placeholder="Enter your email" required autocomplete="email">
+        </div>
+
+        <!-- PASSWORD FIELD WITH SHOW/HIDE TOGGLE - FIXED -->
+        <div style="margin-bottom:22px;">
+          <label for="signinPassword" style="display:block; margin-bottom:4px; font-weight:600; font-size:0.9rem;">Password</label>
+          <div class="password-wrapper" style="display:flex; gap:8px; align-items:center; width:100%; margin-top:4px;">
+            <input type="password" id="signinPassword" name="password" placeholder="Enter your password" required style="flex:1; min-width:0; padding:10px 14px; border:none; outline:none; border-radius:10px; background:rgba(255,255,255,0.12); color:white; font-size:0.95rem; width:100%;" autocomplete="current-password" aria-label="Password">
+            <!-- Show/Hide password toggle button -->
+            <button type="button" id="toggleSignin" class="convert-btn toggle-btn" style="flex-shrink:0; padding:10px 16px; min-width:44px; min-height:44px; white-space:nowrap; font-size:0.85rem; display:flex; align-items:center; justify-content:center;">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- FORGOT PASSWORD LINK -->
+        <!-- Triggers password reset flow (handled in auth.js with modal) -->
+        <!-- Hover effects via inline mouseover/mouseout for underline toggle -->
+        <div style="text-align:left; margin-bottom:40px; margin-top:25px;">
+          <a href="#" id="forgotPasswordLink" style="color:#00bcd4; font-size:1rem; text-decoration:none; transition:0.3s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+            Forgot password?
+          </a>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <!-- Triggers form submission -> auth.js handles signin -->
+        <button type="submit" class="convert-btn" style="width:100%; padding:14px; font-size:1rem;">Sign In</button>
+
+        <!-- CONTAINER FOR SUCCESS/ERROR MESSAGES -->
+        <!-- Dynamically populated by auth.js with toast notifications or inline messages -->
+        <div id="signinMessage" style="margin-top:18px; text-align:center;"></div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ============================================
+       JAVASCRIPT - AUTHENTICATION LOGIC
+       ============================================ -->
+  <!-- Handles form submission, password toggle, and user authentication -->
+  <!-- '?v=5' query params for cache busting - ensures latest version loads -->
+  <script src="auth.js?v=5"></script>
+
+  <!-- Toast notification system for user feedback (success/error messages) -->
+  <script src="notifications.js?v=4"></script>
+
+  <!-- Custom modal system for password reset, verification, etc. -->
+  <script src="modal.js?v=4"></script>
+
+  <!-- ============================================
+       FOOTER - COPYRIGHT NOTICE
+       ============================================ -->
+  <footer>
+    <div class="copyright">© 2026 Emmanuel MUKIZA</div>
+  </footer>
+
+</body>
+</html>

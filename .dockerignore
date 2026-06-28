@@ -1,0 +1,23 @@
+# ============================================
+# IGNORED: NODE DEPENDENCIES
+# ============================================
+# Node.js dependencies folder - packages will be reinstalled via package.json inside the container
+node_modules
+
+# ============================================
+# IGNORED: VERSION CONTROL
+# ============================================
+# Git repository data - not needed inside Docker images
+.git
+
+# ============================================
+# IGNORED: DEPLOYMENT CONFIG
+# ============================================
+# Vercel deployment configuration folder - not used in Docker builds
+.vercel
+
+# ============================================
+# IGNORED: LOG FILES
+# ============================================
+# Application logs - excluded to keep image clean
+*.log

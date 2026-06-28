@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ============================================
+       METADATA & SEO CONFIGURATION
+       ============================================ -->
+  <!-- Basic character encoding and responsive viewport settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <!-- SEO meta tags for search engine optimization -->
+  <meta name="description" content="Create an account for the Universal Online File Converter.">
+  <meta name="keywords" content="sign up, register, create account, online file converter account">
+  <meta name="robots" content="index, follow"> <!-- Allows search engines to index and follow links -->
+  
+  <!-- Open Graph tags for social media sharing previews (Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="Sign Up | Online File Converter">
+  <meta property="og:description" content="Create your account and start using the Universal Online File Converter.">
+  <meta property="og:image" content="favicon.png"> <!-- Image shown when link is shared -->
+  
+  <!-- Page title displayed in browser tab -->
+  <title>Sign Up | Online File Converter</title>
+  
+  <!-- ============================================
+       FAVICON & ICON LINKS
+       ============================================ -->
+  <!-- Multiple icon formats for cross-browser and device compatibility -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png"> <!-- For iOS devices when adding to home screen -->
+  
+  <!-- ============================================
+       STYLESHEETS
+       ============================================ -->
+  <!-- Custom site stylesheet with dark glass-morphism theme -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Font Awesome 6 icon library for UI icons (eye, user, info, etc.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <!-- Left side: primary navigation links to main pages -->
+  <!-- Right side: Sign Up is active (highlighted with 'active' class) -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+      <a href="projects.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Other Projects</a>
+      <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About & Support</a>
+    </div>
+    <div class="nav-right">
+      <a href="signin.html" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+      <!-- 'active' class highlights current page in navigation -->
+      <a href="signup.html" class="nav-link active"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       PAGE HEADER
+       ============================================ -->
+  <!-- Main title and subtitle for the registration page -->
+  <header>
+    <h1>Create Account</h1>
+    <p class="subtitle">Register securely to unlock larger file conversions.</p>
+    <!-- Subtitle emphasizes benefit of registering: larger file conversions -->
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT - SIGN UP FORM
+       ============================================ -->
+  <!-- Registration form with username, email, password (with show/hide toggle), confirm password, and password requirements -->
+  <main class="dashboard">
+    <!-- Limited to max-width:520px for centered, compact form layout -->
+    <div class="converter-box" style="max-width:520px; padding:20px 28px; gap:12px;">
+      <!-- Form submission handled by JavaScript (auth.js) via event listener -->
+      <!-- autocomplete="off" prevents browser from autofilling -->
+      <form id="signupForm" autocomplete="off" style="width:100%;">
+        
+        <!-- ==========================================
+             USERNAME FIELD
+             ========================================== -->
+        <!-- Username is required with minimum 3 characters -->
+        <div style="margin-bottom:14px;">
+          <label for="signupUsername" style="display:block; margin-bottom:4px; font-weight:600; font-size:0.9rem;">Username</label>
+          <input type="text" id="signupUsername" placeholder="Choose a username" minlength="3" required style="width:100%; padding:10px 14px; border:none; outline:none; border-radius:10px; background:rgba(255,255,255,0.12); color:white; font-size:0.95rem;">
+        </div>
+
+        <!-- ==========================================
+             EMAIL FIELD
+             ========================================== -->
+        <!-- Email must be valid format (browser validates type="email") -->
+        <div style="margin-bottom:14px;">
+          <label for="signupEmail" style="display:block; margin-bottom:4px; font-weight:600; font-size:0.9rem;">Email</label>
+          <input type="email" id="signupEmail" placeholder="Enter your email" required style="width:100%; padding:10px 14px; border:none; outline:none; border-radius:10px; background:rgba(255,255,255,0.12); color:white; font-size:0.95rem;">
+        </div>
+
+        <!-- ==========================================
+             PASSWORD FIELD WITH SHOW/HIDE TOGGLE - FIXED
+             ========================================== -->
+        <div style="margin-bottom:14px;">
+          <label for="signupPassword" style="display:block; margin-bottom:4px; font-weight:600; font-size:0.9rem;">Password</label>
+          <div class="password-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+            <input type="password" id="signupPassword" placeholder="Create password" required style="flex:1; min-width:0; padding:10px 14px; border:none; outline:none; border-radius:10px; background:rgba(255,255,255,0.12); color:white; font-size:0.95rem; width:100%;">
+            <!-- Toggle button to show/hide password visibility -->
+            <button type="button" id="toggleSignup" class="convert-btn toggle-btn" style="flex-shrink:0; padding:10px 16px; min-width:44px; min-height:44px; white-space:nowrap; font-size:0.85rem; display:flex; align-items:center; justify-content:center;">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             CONFIRM PASSWORD FIELD
+             ========================================== -->
+        <!-- Used to verify user typed password correctly (matches password field) -->
+        <div style="margin-bottom:14px;">
+          <label for="signupConfirmPassword" style="display:block; margin-bottom:4px; font-weight:600; font-size:0.9rem;">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" required style="width:100%; padding:10px 14px; border:none; outline:none; border-radius:10px; background:rgba(255,255,255,0.12); color:white; font-size:0.95rem;">
+        </div>
+
+        <!-- ==========================================
+             PASSWORD REQUIREMENTS
+             ========================================== -->
+        <!-- Shows the user what password criteria must be met -->
+        <!-- Criteria: at least 5 chars, one capital, one number, one symbol -->
+        <div style="color:#bbb; font-size:0.75rem; line-height:1.6; margin-bottom:14px; background:rgba(255,255,255,0.05); padding:8px 14px; border-radius:8px;">
+          <i class="fa-solid fa-circle-info" style="color:#00bcd4; margin-right:4px;"></i>
+          Requirements: At least 5 chars, one capital letter, one number, one symbol
+        </div>
+
+        <!-- ==========================================
+             SUBMIT BUTTON
+             ========================================== -->
+        <!-- Triggers form submission -> auth.js handles signup -->
+        <button type="submit" class="convert-btn" style="width:100%; padding:12px; font-size:0.95rem;">Create Account</button>
+
+        <!-- ==========================================
+             MESSAGE CONTAINER
+             ========================================== -->
+        <!-- Dynamically populated by auth.js with success/error messages -->
+        <div id="signupMessage" style="margin-top:14px; text-align:center;"></div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ============================================
+       JAVASCRIPT - AUTHENTICATION LOGIC
+       ============================================ -->
+  <!-- Handles form submission, password toggle, and account creation -->
+  <!-- '?v=5' query params for cache busting - ensures latest version loads -->
+  <script src="auth.js?v=5"></script>
+
+  <!-- Toast notification system for modern user feedback messages -->
+  <script src="notifications.js?v=4"></script>
+  
+  <!-- Custom modal system for verification and confirmation popups -->
+  <script src="modal.js?v=4"></script>
+
+  <!-- ============================================
+       FOOTER - COPYRIGHT NOTICE
+       ============================================ -->
+  <footer>
+    <div class="copyright">© 2026 Emmanuel MUKIZA</div>
+  </footer>
+
+</body>
+</html>

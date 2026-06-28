@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ============================================
+       METADATA & SEO CONFIGURATION
+       ============================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO meta tags for search engine optimization -->
+  <meta name="description" content="About and support page for the Universal Online File Converter by Emmanuel MUKIZA.">
+  <meta name="keywords" content="about file converter, support, contact Emmanuel Mukiza, online converter help">
+  <meta name="robots" content="index, follow"> <!-- Allows search engines to index and follow links -->
+  <!-- Open Graph tags for social media sharing previews -->
+  <meta property="og:title" content="About & Support | Emmanuel MUKIZA">
+  <meta property="og:description" content="Need help? Contact Emmanuel MUKIZA through email or social media.">
+  <meta property="og:image" content="favicon.png"> <!-- Image shown when link is shared -->
+  <title>About & Support | Emmanuel MUKIZA</title>
+  <!-- ============================================
+       FAVICON & ICON LINKS
+       ============================================ -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png"> <!-- For iOS devices -->
+  <!-- ============================================
+       STYLESHEETS
+       ============================================ -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome 6 icon library for social media and UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <!-- Left side: primary navigation links to main pages -->
+  <!-- Right side: dynamically shows either Sign In/Sign Up (guests) or Profile (logged-in users) -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+      <a href="projects.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Other Projects</a>
+      <!-- 'active' class highlights current page in navigation -->
+      <a href="about.html" class="nav-link active"><i class="fa-solid fa-circle-info"></i> About & Support</a>
+    </div>
+    <div class="nav-right" id="navRight">
+      <!-- Guest navigation - shown when user is not logged in -->
+      <div id="guestNav">
+        <a href="signin.html" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+        <a href="signup.html" class="nav-link"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+      </div>
+      <!-- Profile navigation - shown when user is logged in -->
+      <!-- Initially hidden (display:none) until JavaScript reveals it -->
+      <div id="profileNav" style="display:none;">
+        <a href="profile.html" class="nav-link" id="profileButton">
+          <!-- Displays user's profile photo from localStorage or default icon -->
+          <img id="navProfilePhoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" style="width:28px; height:28px; border-radius:50%; object-fit:cover; border:2px solid #00bcd4; margin-right:4px;">
+          <span id="navUsername">Profile</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       PAGE HEADER
+       ============================================ -->
+  <!-- Main title and subtitle for the about/support page -->
+  <header>
+    <h1>About & Support</h1>
+    <p class="subtitle">Need assistance? Contact me through any platform below.</p>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT - CONTACT LINKS
+       ============================================ -->
+  <!-- Container with contact links to reach the developer -->
+  <main class="dashboard">
+    <!-- Limited to max-width:600px for readable, centered content -->
+    <div class="converter-box" style="max-width:600px; margin-bottom: 15px;">
+      
+      <!-- EMAIL CONTACT -->
+      <!-- Opens default email client with pre-filled recipient -->
+      <a href="mailto:mukizacreator@gmail.com" class="support-link"><i class="fa-solid fa-envelope"></i> Email: mukizacreator@gmail.com</a>
+      
+      <!-- INSTAGRAM -->
+      <!-- Opens Instagram profile in new tab -->
+      <a href="https://www.instagram.com/mukiza_me" target="_blank" class="support-link"><i class="fa-brands fa-instagram"></i> Instagram: @mukiza_me</a>
+      
+      <!-- FACEBOOK -->
+      <!-- Opens Facebook profile in new tab -->
+      <a href="https://web.facebook.com/meMukiza" target="_blank" class="support-link"><i class="fa-brands fa-facebook"></i> Facebook: meMukiza</a>
+      
+      <!-- X (formerly Twitter) -->
+      <!-- Opens X profile in new tab -->
+      <a href="https://x.com/mukiza_me" target="_blank" class="support-link"><i class="fa-brands fa-x-twitter"></i> X: @mukiza_me</a>
+      
+      <!-- YOUTUBE -->
+      <!-- Opens YouTube channel in new tab -->
+      <a href="#" class="support-link"><i class="fa-brands fa-youtube"></i> YouTube: www.youtube.com/@Th_estarME</a>
+    </div>
+  </main>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <!-- Toast notification system for user feedback -->
+  <script src="notifications.js?v=4"></script>
+  <!-- Custom modal system for popups -->
+  <script src="modal.js?v=4"></script>
+
+  <!-- ============================================
+       NAVIGATION AUTH SCRIPT
+       ============================================ -->
+  <!-- Immediately Invoked Function Expression (IIFE) to handle navigation auth -->
+  <!-- Checks if user is logged in and displays appropriate nav elements -->
+  <script>
+  (function() {
+    try {
+      // Get logged-in user email from localStorage
+      const loggedInEmail = localStorage.getItem("loggedInUser");
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find((u) => u.email === loggedInEmail);
+      
+      // Try to get user data from localStorage first, then from database
+      let userData = null;
+      try {
+        userData = JSON.parse(localStorage.getItem("userData"));
+      } catch(e) {}
+      
+      // Get navigation elements
+      const guestNav = document.getElementById("guestNav");
+      const profileNav = document.getElementById("profileNav");
+      const navUsername = document.getElementById("navUsername");
+      const navProfilePhoto = document.getElementById("navProfilePhoto");
+      
+      // Default profile icon if no photo is available
+      const DEFAULT_ICON = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+      // CASE 1: User is logged in AND userData is available in localStorage
+      if (loggedInEmail && userData) {
+        // Show profile navigation with user data
+        if (guestNav) guestNav.style.display = "none"; // Hide Sign In/Sign Up
+        if (profileNav) {
+          profileNav.style.display = "flex"; // Show profile
+          profileNav.style.alignItems = "center";
+        }
+        // Update username and photo from cached data
+        if (navUsername) navUsername.textContent = userData.username || 'Profile';
+        if (navProfilePhoto) {
+          navProfilePhoto.src = userData.photo || DEFAULT_ICON;
+        }
+      } 
+      // CASE 2: User is logged in but userData not in localStorage
+      else if (loggedInEmail) {
+        // Fetch user data from server API
+        fetch("/api/get-user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: loggedInEmail })
+        })
+        .then(res => res.json())
+        .then(data => {
+          // Cache user data in localStorage for future use
+          localStorage.setItem("userData", JSON.stringify(data));
+          // Update navigation with fetched data
+          if (navUsername) navUsername.textContent = data.username || 'Profile';
+          if (navProfilePhoto) navProfilePhoto.src = data.photo || DEFAULT_ICON;
+          if (guestNav) guestNav.style.display = "none";
+          if (profileNav) {
+            profileNav.style.display = "flex";
+            profileNav.style.alignItems = "center";
+          }
+        })
+        .catch(err => console.error("Failed to load user data:", err));
+      } 
+      // CASE 3: User is NOT logged in (guest)
+      else {
+        // Show guest navigation (Sign In / Sign Up)
+        if (guestNav) {
+          guestNav.style.display = "flex";
+          guestNav.style.alignItems = "center";
+          guestNav.style.gap = "8px";
+        }
+        // Hide profile navigation
+        if (profileNav) {
+          profileNav.style.display = "none";
+        }
+      }
+    } catch (error) {
+      // Error handling: fallback to showing guest navigation
+      console.error("Navigation error:", error);
+      const guestNav = document.getElementById("guestNav");
+      if (guestNav) {
+        guestNav.style.display = "flex";
+        guestNav.style.alignItems = "center";
+        guestNav.style.gap = "8px";
+      }
+      const profileNav = document.getElementById("profileNav");
+      if (profileNav) profileNav.style.display = "none";
+    }
+  })();
+</script>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer>
+    <div class="copyright">© 2026 Emmanuel MUKIZA</div>
+  </footer>
+
+</body>
+</html>

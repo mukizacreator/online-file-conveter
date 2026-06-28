@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ============================================
+       METADATA & SEO CONFIGURATION
+       ============================================ -->
+  <!-- Basic character encoding and responsive viewport settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <!-- SEO meta tags: comprehensive description and keywords for search engine optimization -->
+  <!-- Description should be under 160 characters for optimal search results -->
+  <meta name="description" content="Convert PDF, DOCX, JPG, PNG, WEBP, MP3, EPUB and many other file formats online for free. Fast, secure and easy to use.">
+  <!-- Keywords help search engines understand the page content -->
+  <meta name="keywords" content="file converter, online file converter, convert pdf to docx, convert docx to pdf, convert jpg to png, convert png to jpg, convert webp to png, convert mp3 to wav, convert epub to pdf, universal converter, free online converter">
+  <!-- Instructs search engines to index this page and follow its links -->
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph tags for social media sharing previews (Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="Online File Converter">
+  <meta property="og:description" content="Universal online file converter for documents, images and audio files.">
+  <meta property="og:image" content="favicon.png"> <!-- Image shown when link is shared -->
+  
+  <!-- Page title displayed in browser tab -->
+  <title>Online File Converter | Universal File Conversion</title>
+  
+  <!-- ============================================
+       FAVICON & ICON LINKS
+       ============================================ -->
+  <!-- Multiple icon formats for cross-browser and device compatibility -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png"> <!-- For iOS devices when adding to home screen -->
+  
+  <!-- ============================================
+       STYLESHEETS
+       ============================================ -->
+  <!-- Custom site stylesheet with dark glass-morphism theme -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Font Awesome 6 icon library for navigation and UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+       TOP NAVIGATION BAR
+       ============================================ -->
+  <!-- Left side: primary navigation links (Dashboard is active with 'active' class) -->
+  <!-- Right side: shows Sign In/Sign Up when logged out, or Profile icon when logged in -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <!-- 'active' class highlights current page in navigation -->
+      <a href="index.html" class="nav-link active"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+      <a href="projects.html" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Other Projects</a>
+      <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About & Support</a>
+    </div>
+    <div class="nav-right" id="navRight">
+      <!-- Guest Navigation: visible when user is not logged in (initially shown) -->
+      <div id="guestNav">
+        <a href="signin.html" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+        <a href="signup.html" class="nav-link"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+      </div>
+      <!-- Profile Navigation: visible when user is logged in (initially hidden) -->
+      <!-- JavaScript will show/hide based on login status -->
+      <div id="profileNav" style="display:none;">
+        <a href="profile.html" class="nav-link" id="profileButton">
+          <!-- Profile photo with border, fallback to default icon -->
+          <img id="navProfilePhoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" style="width:28px; height:28px; border-radius:50%; object-fit:cover; border:2px solid #00bcd4; margin-right:4px;">
+          <span id="navUsername">Profile</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       PAGE HEADER
+       ============================================ -->
+  <!-- Main title and subtitle introducing the file converter tool -->
+  <header>
+    <h1>Online File Converter</h1>
+    <p class="subtitle">Convert your files easily and securely — built by Emmanuel MUKIZA</p>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT - FILE CONVERTER TOOL
+       ============================================ -->
+  <!-- Core conversion interface: file selection, format dropdown, and convert button -->
+  <main class="dashboard">
+    <div class="converter-box">
+      <!-- Input row: file picker, filename display, format dropdown, convert button -->
+      <div class="input-row">
+        <!-- Hidden file input with custom styled label -->
+        <!-- The label acts as a styled button that triggers the hidden input -->
+        <label for="fileInput" class="custom-file-label"><i class="fa-solid fa-folder-open" style="animation-duration: 0.5ms;"></i> Choose File</label>
+        <input type="file" id="fileInput">
+        
+        <!-- Displays the name of the selected file (updated by script.js) -->
+        <span id="fileName">No file chosen</span>
+        
+        <!-- Dropdown for selecting target output format -->
+        <!-- Default options: most common document and image formats -->
+        <select id="formatSelect" class="format-select">
+          <option value="pdf">PDF</option>
+          <option value="docx">DOCX</option>
+          <option value="jpg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="webp">WEBP</option>
+          <option value="txt">TXT</option>
+          <option value="epub">EPUB</option>
+        </select>
+        
+        <!-- Convert button to trigger file conversion -->
+        <!-- Handled by script.js - shows progress, disables during conversion -->
+        <button id="convertBtn" class="convert-btn"><i class="fa-solid fa-arrows-rotate"></i> Convert</button>
+      </div>
+      
+      <!-- Container for displaying conversion results, errors, or download links -->
+      <!-- Dynamically populated by script.js with progress bar or result message -->
+      <div id="result"></div>
+    </div>
+  </main>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <!-- Main application logic for file conversion -->
+  <!-- Handles: file selection, conversion request, progress tracking, result display -->
+  <script src="script.js"></script>
+
+  <!-- ============================================
+       NAVIGATION AUTH SCRIPT
+       ============================================ -->
+  <!-- Immediately Invoked Function Expression (IIFE) for navigation auth -->
+  <!-- Checks if user is logged in and displays appropriate nav elements -->
+  <script>
+  (function() {
+    try {
+      // Check if user is logged in via localStorage
+      const loggedInEmail = localStorage.getItem("loggedInUser");
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find((u) => u.email === loggedInEmail);
+      
+      // Try to get cached user data from localStorage
+      let userData = null;
+      try {
+        userData = JSON.parse(localStorage.getItem("userData"));
+      } catch(e) {}
+      
+      // Get navigation elements
+      const guestNav = document.getElementById("guestNav");
+      const profileNav = document.getElementById("profileNav");
+      const navUsername = document.getElementById("navUsername");
+      const navProfilePhoto = document.getElementById("navProfilePhoto");
+      
+      // Default profile icon (human shape) - used when no photo is uploaded
+      const DEFAULT_ICON = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+      // CASE 1: User is logged in AND data is cached
+      if (loggedInEmail && userData) {
+        // Show profile icon with username, hide Sign In/Sign Up
+        if (guestNav) guestNav.style.display = "none";
+        if (profileNav) {
+          profileNav.style.display = "flex";
+          profileNav.style.alignItems = "center";
+        }
+        if (navUsername) navUsername.textContent = userData.username || 'Profile';
+        if (navProfilePhoto) {
+          navProfilePhoto.src = userData.photo || DEFAULT_ICON;
+        }
+      } 
+      // CASE 2: User is logged in but data not cached - fetch from server
+      else if (loggedInEmail) {
+        fetch("/api/get-user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: loggedInEmail })
+        })
+        .then(res => res.json())
+        .then(data => {
+          // Cache user data in localStorage for future visits
+          localStorage.setItem("userData", JSON.stringify(data));
+          // Update navigation with fetched data
+          if (navUsername) navUsername.textContent = data.username || 'Profile';
+          if (navProfilePhoto) navProfilePhoto.src = data.photo || DEFAULT_ICON;
+          if (guestNav) guestNav.style.display = "none";
+          if (profileNav) {
+            profileNav.style.display = "flex";
+            profileNav.style.alignItems = "center";
+          }
+        })
+        .catch(err => console.error("Failed to load user data:", err));
+      } 
+      // CASE 3: User is NOT logged in (guest)
+      else {
+        // Show Sign In/Sign Up, hide profile icon
+        if (guestNav) {
+          guestNav.style.display = "flex";
+          guestNav.style.alignItems = "center";
+          guestNav.style.gap = "8px";
+        }
+        if (profileNav) {
+          profileNav.style.display = "none";
+        }
+      }
+    } catch (error) {
+      // Error fallback: Show Sign In/Sign Up if something goes wrong
+      console.error("Navigation error:", error);
+      const guestNav = document.getElementById("guestNav");
+      if (guestNav) {
+        guestNav.style.display = "flex";
+        guestNav.style.alignItems = "center";
+        guestNav.style.gap = "8px";
+      }
+      const profileNav = document.getElementById("profileNav");
+      if (profileNav) profileNav.style.display = "none";
+    }
+  })();
+</script>
+
+  <!-- Toast notification system for modern user feedback messages -->
+  <script src="notifications.js?v=4"></script>
+  
+  <!-- Custom modal system for verification and confirmation popups -->
+  <script src="modal.js?v=4"></script>
+
+  <!-- ============================================
+       FOOTER - SUPPORT INFO & COPYRIGHT
+       ============================================ -->
+  <!-- Lists all supported file formats and provides a brief system description -->
+  <footer>
+    <section class="footer-support">
+      My system supports: Documents: PDF, DOCX, DOC, ODT, TXT, EPUB, RTF, HTML | Images: JPG, PNG, WEBP, TIFF, BMP, GIF.<br>
+      Easily convert all your files securely and instantly.
+    </section>
+    <div class="copyright">© 2026 Emmanuel MUKIZA | Hosted on GitHub</div>
+  </footer>
+
+</body>
+</html>
